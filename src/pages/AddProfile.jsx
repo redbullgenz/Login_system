@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {useNavigate } from 'react-router-dom';
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { UserAuth } from '../context/Context';
 import { db } from '../firebase-config';
 import styles from '../Style/Global.module.css';
@@ -14,29 +14,17 @@ const AddProfile = () => {
     const navigate = useNavigate()
     const { user } = UserAuth();
 
-    const [userid, setUserId] = useState('');
-
-    const [currentUser, setCurrentUser] = useState();
-    const [data, setData] = useState('');
-
-    const refUser = doc(db, "users", user.uid, "userData");
-
-
-    // react firestore, get uid and add in collection?
-
-
     const handleSubmit = async (e) => {
-        e.preventDefault();
-          setDoc(refUser, 
-            { capital: true },
-            { merge: true },
-            {name: name});
-          try {
-            navigate('/Account')
-          } catch (e) {
-            setError(e.message)
-            console.log(e.message)
-          }
+      navigate('/Account')
+      try {
+        await addDoc(collection(db, "users", user.uid, "dataUser"),{
+          vorname: name
+        });
+      }
+      catch (e) {
+        setError(e.message)
+        console.log(e.message)
+      }
     };
 
     return (

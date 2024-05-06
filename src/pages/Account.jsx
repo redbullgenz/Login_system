@@ -9,7 +9,8 @@ const Account = () => {
     const { user, logout } = UserAuth();
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
-    const usersCollectionRef = collection(db, "users", user.uid, "data")
+    const usersCollectionRef = collection(db, "users", user.uid, "dataUser")
+    const [userEmail, setUserEmail] = useState(null);
 
     useEffect(() => {
         const getUsers = async () => {
@@ -18,6 +19,7 @@ const Account = () => {
         }
         getUsers()
     }, [])
+    
 
     const handleLogout = async () => {
         try {
@@ -39,9 +41,8 @@ const Account = () => {
                     return (
                         <div>
                         <h4>Profile</h4>
-                        <p>{userData.name}</p>
-                        <p>E-Mail benutz: <span>{userData.email}</span></p>
-                        <p>Erste Login: {userData.date}</p>
+                        <p>{userData.vorname}</p>
+                        <p>{userData.email}</p>
                         </div>
                     )
                 })}

@@ -24,7 +24,7 @@ const Account = () => {
     const handleLogout = async () => {
         try {
             await logout();
-            navigate('/Login');
+            navigate('/');
             console.log('du hast dich ausgeloggt')
         } catch (e) {
             console.log(e.message);

@@ -73,7 +73,7 @@ const Logup = () => {
 
                     <p>
                         Sind Sie schon bei uns registriert?{' '}
-                        <Link to='/Login'>
+                        <Link to='/'>
                             Anmelden
                         </Link>
                     </p>
